@@ -15,3 +15,20 @@ Before starting with installation, make you have the following:
 
 6. Both these boxes should be reachable via hostnames. Hence, add the IP address and the hostnames ( Controller and Compute ) such that they can ping themselves as well as the other node. For this, adding an entry in /etc/hosts is just fine.
 
+To start off with the installation, run the first script i.e 00-prerequisites.sh
+
+Usage:  ./00-prerequisites.sh   <controller|compute>
+
+If you are running it on the controller node, use 'controller' as the argument. Else, if you are running it on the compute node, use 'compute' as the argument.
+
+For eg.:
+
+[root@controller openstack-installation]# ./00-prerequisites.sh controller
+Installing and configuring NTP service now
+Enter the NTP server of your choice
+
+
+
+
+
+PS: This is not complete. Will complete it ASAP
