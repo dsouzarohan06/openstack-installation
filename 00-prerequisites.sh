@@ -2,8 +2,8 @@
 #title           :00-prerequisites.sh
 #description     :This is the first script to be run. This will install all the prerequisites needed before installation of openstack.
 #author		 :Rohan Dsouza
-#usage		 :bash mkscript.sh
-#==============================================================================
+#usage		 :bash 00-prerequisites.sh <Argument> OR ./00-prerequisites.sh <Argument>
+#=========================================================================================================
 
 if [ $# == 0 ]; then
 echo "Usage:  $0   <controller|compute>"
