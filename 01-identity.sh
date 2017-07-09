@@ -23,7 +23,7 @@ echo -e "Installing the Openstack Keystone service. Installation time may depend
 
 echo -e "Making configuration changes now \n"
 
-sed -i '/^#connection\ =\ <None>/a\connection\ =\ mysql+pymysql://keystone:@controller/keystone' /etc/keystone/keystone.conf
+sed -i "/^#connection\ =\ <None>/a\connection\ =\ mysql+pymysql://keystone:$keystone_passwd@controller/keystone" /etc/keystone/keystone.conf
 sed -i '/^#provider\ =\ uuid/a\provider = fernet' /etc/keystone/keystone.conf
 
 echo -e "Syncing Keystone DB with the configuration changes made"
@@ -63,6 +63,22 @@ EOF
 
 echo -e "Installation of Keystone is complete. You may add users, groups and roles according to your requirements. \n"
 
-echo "You may also read the further instructions in the README.md file"
+cat << EOF
+
+To make sure your installation is complete, run the following 2 commands:
+
+[root@controller ~]# source /root/admin-openrc
+[root@controller ~]# openstack user list
++----------------------------------+-------+
+| ID                               | Name  |
++----------------------------------+-------+
+| 39056e2af63b407a97d5ec69ddf93241 | admin |
++----------------------------------+-------+
+
+If you do not get the desired output, check for Errors in /var/log/keystone/keystone.log
+
+If the script ran just as expected, You may now read the further instructions in the README.md file
+
+EOF
 
 exit 0

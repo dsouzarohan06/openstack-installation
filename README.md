@@ -14,7 +14,7 @@ Before starting with installation, make sure you have the following:
 5. Disable selinux. Also, just do a 'yum update -y' on both these nodes so as to make sure that both these nodes have the latest kernels and the latest applications installed.
 
 
-To start off with the installation, run the first script i.e 00-prerequisites.sh
+i) To start off with the installation, run the first script i.e 00-prerequisites.sh
 
 Usage:  ./00-prerequisites.sh   <controller|compute>
 
@@ -25,6 +25,14 @@ For eg.:
 [root@controller openstack-installation]# ./00-prerequisites.sh controller
 Installing and configuring NTP service now
 Enter the NTP server of your choice
+
+
+ii) Post running the 00-prerequisites.sh script, it's now time to install the Identity service of OpenStack a.k.a Keystone. It's now time to run an another script which will install and configure Keystone for us. The script name is: 01-identity.sh
+
+Usage:  ./01-identity.sh
+
+PS: The above mentioned script needs to be run on the controller node. I'll specifically mention which script has to be run on the compute node.
+
 
 
 
