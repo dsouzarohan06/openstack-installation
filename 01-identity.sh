@@ -9,7 +9,7 @@ echo -e "Installing and configuring the Identity service\n"
 echo "Creating a user and a database named keystone. What would you like this user's password to be ?"
 read -s keystone_mysql_passwd
 
-mysql --user=root << EOF 2>> /dev/null
+mysql --user=root << EOF
  
 CREATE DATABASE keystone;
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY '${keystone_mysql_passwd}';
@@ -39,6 +39,7 @@ echo -e "Bootstraping the Identity service:\n"
 echo "Kindly provide with a suitable password for the Admin user"
 read -s keystone_passwd
 
+echo "Accepted password. Finishing bootstraping of the Identity service..."
 /usr/bin/keystone-manage bootstrap --bootstrap-password $keystone_passwd --bootstrap-admin-url http://controller:35357/v3/ --bootstrap-internal-url http://controller:35357/v3/ --bootstrap-public-url http://controller:5000/v3/ --bootstrap-region-id RegionOne 2>> /dev/null
 
 sed -i '/^#ServerName/a\ServerName\ controller' /etc/httpd/conf/httpd.conf
@@ -61,5 +62,7 @@ EOF
 /usr/bin/systemctl restart httpd.service
 
 echo -e "Installation of Keystone is complete. You may add users, groups and roles according to your requirements. \n"
+
+echo "You may also read the further instructions in the README.md file"
 
 exit 0
