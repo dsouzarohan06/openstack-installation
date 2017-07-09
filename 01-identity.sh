@@ -23,7 +23,7 @@ echo -e "Installing the Openstack Keystone service. Installation time may depend
 
 echo -e "Making configuration changes now \n"
 
-sed -i "/^#connection\ =\ <None>/a\connection\ =\ mysql+pymysql://keystone:$keystone_passwd@controller/keystone" /etc/keystone/keystone.conf
+sed -i "/^#connection\ =\ <None>/a\connection\ =\ mysql+pymysql://keystone:$keystone_mysql_passwd@controller/keystone" /etc/keystone/keystone.conf
 sed -i '/^#provider\ =\ uuid/a\provider = fernet' /etc/keystone/keystone.conf
 
 echo -e "Syncing Keystone DB with the configuration changes made"
