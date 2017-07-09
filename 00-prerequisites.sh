@@ -97,6 +97,12 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 FLUSH PRIVILEGES;
 EOF
 
+cat << EOF > /root/.my.cnf
+[client]
+user=root
+password=$mysql_root_passwd
+EOF
+
 echo "Congratulations, MariaDB is successfully installed and configured. Now its time to install and configure RabbitMQ which will act as a message queue"
 
 /usr/bin/yum install -y rabbitmq-server >> /dev/null
@@ -106,7 +112,7 @@ echo "Congratulations, MariaDB is successfully installed and configured. Now its
 
 echo "We are creating a user named openstack for RabbitMQ. What would you like the user's password to be?"
 read -s rabbitmq_passwd
-
+echo "Accepted password. Adding openstack user now."
 /usr/sbin/rabbitmqctl add_user openstack $rabbitmq_passwd 
 /usr/sbin/rabbitmqctl set_permissions openstack ".*" ".*" ".*"
 
