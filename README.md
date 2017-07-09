@@ -33,6 +33,19 @@ Usage:  ./01-identity.sh
 
 PS: The above mentioned script needs to be run on the controller node. I'll specifically mention which script has to be run on the compute node.
 
+Post running the 01-identity.sh, to verify if everything has installed correctly, run the following commands:
+
+
+[root@controller ~]# source /root/admin-openrc
+[root@controller ~]# openstack user list
++----------------------------------+-------+
+| ID                               | Name  |
++----------------------------------+-------+
+| 39056e2af63b407a97d5ec69ddf93241 | admin |
++----------------------------------+-------+
+
+If you do not get the desired output, check for Errors in /var/log/keystone/keystone.log
+
 
 
 
