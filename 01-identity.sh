@@ -37,7 +37,7 @@ echo -e "Initializing Fernet key repositories\n"
 
 echo -e "Bootstraping the Identity service:\n"
 echo "Kindly provide with a suitable password for the Admin user"
-read -p keystone_passwd
+read -s keystone_passwd
 
 /usr/bin/keystone-manage bootstrap --bootstrap-password $keystone_passwd --bootstrap-admin-url http://controller:35357/v3/ --bootstrap-internal-url http://controller:35357/v3/ --bootstrap-public-url http://controller:5000/v3/ --bootstrap-region-id RegionOne 2>> /dev/null
 
