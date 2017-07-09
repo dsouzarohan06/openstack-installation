@@ -59,3 +59,7 @@ EOF
 
 /usr/bin/systemctl enable httpd.service 2>> /dev/null
 /usr/bin/systemctl restart httpd.service
+
+echo -e "Installation of Keystone is complete. You may add users, groups and roles according to your requirements. \n"
+
+exit 0
