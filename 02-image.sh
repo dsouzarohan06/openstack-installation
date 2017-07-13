@@ -65,8 +65,31 @@ openstack endpoint create --region RegionOne image internal http://controller:92
 
 openstack endpoint create --region RegionOne image admin http://controller:9292
 
-echo -e "Finally installing the glance package\n"
+echo -e "Finally installing the glance package. Installation may depend on your internet speed.\n"
 
 yum install openstack-glance >> /dev/null
+
+echo -e "Making configuration changes now\n"
+
+sed -i "/^#connection\ =\ <None>/a\connection\ =\ mysql+pymysql://glance:$glance_mysql_passwd@controller/glance" /etc/glance/glance-api.conf
+sed -i '/^#flavor\ =\ keystone/a\flavor\ =\ keystone' /etc/glance/glance-api.conf 
+
+test="
+password=GLANCE_PASS
+username=glance
+project_name=service
+user_domain_name=Default
+project_domain_name=Default
+auth_type=password
+memcached_servers=controller:11211
+auth_url=http://controller:35357
+auth_uri=http://controller:5000
+"
+
+for i in `echo "$test"`
+do
+sed -i "/^#auth_uri\ =\ <None>/a $i" /etc/glance/glance-api.conf
+done
+
 
 
